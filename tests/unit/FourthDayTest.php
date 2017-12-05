@@ -14,22 +14,24 @@ class FourthDayTest extends \Codeception\Test\Unit
      */
     protected $day;
     
-    protected $input;
+    protected static $input;
+    
+    
+    public static function setUpBeforeClass()
+    {
+        self::$input = file_get_contents(__DIR__ . '/../../src/inputs/fourth-day-input.txt');
+    }
     
     
     protected function _before()
     {
         $this->day = new FourthDay();
-        
-        if ($this->input === null) {
-            $this->input = file_get_contents(__DIR__ . '/../../src/inputs/fourth-day-input.txt');
-        }
     }
     
     
     public function testFirstSolution()
     {
-        $result = $this->day->first($this->input);
+        $result = $this->day->first(self::$input);
         
         $this->tester->assertEquals(325, $result);
     }
@@ -37,7 +39,7 @@ class FourthDayTest extends \Codeception\Test\Unit
     
     public function testSecondSolution()
     {
-        $result = $this->day->second($this->input);
+        $result = $this->day->second(self::$input);
         
         $this->assertEquals(119, $result);
     }
