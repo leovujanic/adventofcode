@@ -16,13 +16,46 @@ namespace leovujanic\adventofcode;
 class FifthDay
 {
     
-    
-    public function first()
+    /**
+     * @param array $items
+     *
+     * @return int
+     */
+    public function first(array $items): int
     {
+        return $this->countSteps($items);
     }
     
-    
-    public function second()
+    /**
+     * @param array $items
+     *
+     * @return int
+     */
+    public function second(array $items): int
     {
+        return $this->countSteps($items, true);
+    }
+    
+    /**
+     * @param array $items
+     * @param bool  $isSecond
+     *
+     * @return int
+     */
+    protected function countSteps(array $items, bool $isSecond = false): int
+    {
+        $itemsCount = count($items);
+        $index = 0;
+        $steps = 0;
+        
+        while ($index >= 0 && $index < $itemsCount) {
+            $step = (int)$items[$index];
+            
+            $items[$index] += $step >= 3 && $isSecond ? -1 : 1;
+            $index += $step;
+            ++$steps;
+        }
+        
+        return $steps;
     }
 }
