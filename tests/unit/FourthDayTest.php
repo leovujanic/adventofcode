@@ -2,6 +2,9 @@
 
 use leovujanic\adventofcode\FourthDay;
 
+/**
+ * Class FourthDayTest
+ */
 class FourthDayTest extends \Codeception\Test\Unit
 {
     /**
@@ -14,12 +17,15 @@ class FourthDayTest extends \Codeception\Test\Unit
      */
     protected $day;
     
+    /**
+     * @var
+     */
     protected static $input;
     
     
     public static function setUpBeforeClass()
     {
-        self::$input = file_get_contents(__DIR__ . '/../../src/inputs/fourth-day-input.txt');
+        self::$input = file_get_contents(codecept_data_dir() . '/days/fourth-day-input.txt');
     }
     
     
