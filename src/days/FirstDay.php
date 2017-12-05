@@ -63,21 +63,7 @@ class FirstDay
      */
     public function first(string $digits): int
     {
-        $digits = str_split($digits);
-        $digits[] = reset($digits);
-        
-        $sum = 0;
-        $prev = null;
-        
-        foreach ($digits as $digit) {
-            if ($digit === $prev) {
-                $sum += $digit;
-            }
-            
-            $prev = $digit;
-        }
-        
-        return $sum;
+        return $this->getSum(str_split($digits), 1);
     }
     
     
@@ -90,13 +76,23 @@ class FirstDay
     {
         $digits = str_split($digits);
         
+        return $this->getSum($digits, count($digits) / 2);
+    }
+    
+    /**
+     * @param     $digits
+     * @param int $offset
+     *
+     * @return int
+     */
+    protected function getSum($digits, $offset = 0): int
+    {
         $digitsCount = count($digits);
-        $digitsHalf = $digitsCount / 2;
         
         $sum = 0;
         
         for ($i = 0; $i < $digitsCount; $i++) {
-            if ($digits[$i] === $digits[($i + $digitsHalf) % $digitsCount]) {
+            if ($digits[$i] === $digits[($i + $offset) % $digitsCount]) {
                 $sum += $digits[$i];
             }
         }
